@@ -1,0 +1,98 @@
+[gd_scene load_steps=8 format=3 uid="uid://vlffbuftu4r"]
+
+[ext_resource type="Script" uid="uid://b6qrd4yegipwi" path="res://source/system/screenTransition.gd" id="1"]
+[ext_resource type="Texture2D" uid="uid://c46hkht4auqja" path="res://assets/sprites/Solid-shade.png" id="2_7nxdg"]
+[ext_resource type="Texture2D" uid="uid://b8oln5y4locpg" path="res://assets/sprites/solid-block.png" id="3_yu28p"]
+[ext_resource type="Material" uid="uid://dokqq7kuxo23v" path="res://assets/shaders/metallic-blue.tres" id="4_0brhw"]
+
+[sub_resource type="Animation" id="Animation_ya4bd"]
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("anim/blackout:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 648)]
+}
+
+[sub_resource type="Animation" id="Animation_077ou"]
+resource_name = "fill_up"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("anim/blackout:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("anim/blackout:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("anim/blackout:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.6, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_7nxdg"), ExtResource("3_yu28p"), ExtResource("2_7nxdg"), ExtResource("3_yu28p"), ExtResource("2_7nxdg"), ExtResource("3_yu28p")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("anim/blackout:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 480), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e16u0"]
+_data = {
+&"RESET": SubResource("Animation_ya4bd"),
+&"fill_up": SubResource("Animation_077ou")
+}
+
+[node name="screenTransition" type="CanvasLayer"]
+script = ExtResource("1")
+
+[node name="anim" type="AnimationPlayer" parent="."]
+reset_on_save = false
+libraries = {
+&"": SubResource("AnimationLibrary_e16u0")
+}
+
+[node name="blackout" type="TextureRect" parent="anim"]
+material = ExtResource("4_0brhw")
+offset_top = 480.0
+offset_right = 1840.0
+offset_bottom = 1128.0
+mouse_filter = 2
+texture = ExtResource("2_7nxdg")
+stretch_mode = 1
+
+[connection signal="animation_finished" from="anim" to="." method="_on_anim_animation_finished"]

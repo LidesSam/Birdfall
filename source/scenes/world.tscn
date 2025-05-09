@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dvvy75jb8tc0d"]
+
+[node name="World" type="Node2D"]
+
+[node name="Hud" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 216.0
+offset_bottom = 64.0
+
+[node name="Label" type="Label" parent="Hud"]
+layout_mode = 0
+offset_right = 568.0
+offset_bottom = 64.0
+text = "World"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TileMap" type="TileMap" parent="."]
+format = 2
+
+[node name="Camera2D" type="Camera2D" parent="."]
