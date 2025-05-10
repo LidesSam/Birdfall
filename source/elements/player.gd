@@ -31,7 +31,7 @@ func _ready():
 	fsm.autoload(self)
 	fsm.addGlobalTransition("idle",isOnGround)
 	fsm.addStateTransition("idle","jump",isJumping)
-	fsm.addStateTransition("jump","falling",isFalling)
+	fsm.addGlobalTransition("falling",isFalling)
 	fsm.startState()
 	
 	isGrounded =true
@@ -42,43 +42,30 @@ func _ready():
 	pass # Replace with function body.
 #state flags function
 func isFalling():
-	if velocity.y>0:
-		return true
+		return velocity.y>0
 func isJumping():
 	return isJump
-	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
-
-func Tangible(tangible = true):
-	self.get_node("CollisionShape2D").disabled=!tangible
-	onDropDown=!tangible
-	
-func gravity_step():
-	velocity.y-=-9.8
-	if(velocity.y>=200):
-		velocity.y=200
-
 func _physics_process(delta):
-	gravity_step()
+
+	# Update grounded state from raycast
 	var raycollider = $RayCast2D.get_collider()
-	if(raycollider!=null):
-		isGrounded=true
-	else:
-		isGrounded=false
-	
+	isGrounded = raycollider != null
+
+	# Run FSM logic
 	fsm.fsmUpdate(delta)
 
-	#velocity=move_and_slide(velocity,Vector2(0,-1))
-	
-	var collision = move_and_collide(Vector2.ZERO)
-	if collision:
-		velocity = velocity.slide(collision.normal)
-		if(collision.collider.has_method("is_in_group")):
-			if(collision.collider.is_in_group("items")):
-				pick_item(collision.collider)
+	# Move character using Godot's built-in method
+	move_and_slide()
+
+	# Check for collisions (e.g., item pickups)
+	for i in range(get_slide_collision_count()):
+		var collision = get_slide_collision(i)
+#		if collision.collider.has_method("is_in_group") and collision.collider.is_in_group("items"):
+#			pick_item(collision.collider)
 
 func hurt(points):	
 	lp-=points
@@ -124,7 +111,7 @@ func sidemove():
 func setHud(HUD):
 	hud=HUD
 	
-func setTilemap(tmap:TileMap):
+func setTilemap(tmap:TileMapLayer):
 	tilemap=tmap
 	
 func play_animation(animName):

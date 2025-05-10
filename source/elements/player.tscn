@@ -170,7 +170,7 @@ position = Vector2(0, 24)
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 use_parent_material = true
 sprite_frames = SubResource("6")
-animation = &"walk"
+animation = &"falling"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
