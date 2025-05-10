@@ -7,6 +7,7 @@ func _ready() -> void:
 		$anim.play("idle")
 		
 func _on_body_entered(body: Node2D) -> void:
+	print("aloha 1")
 	if body.is_in_group("player") and !triggered:
 		Global.add_def_time()
 		triggered=true

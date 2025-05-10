@@ -32,6 +32,7 @@ func _process(delta):
 #fsm flags	
 func countdown_over():
 	return countdown.time_left<=0
+	
 func stage_is_complete():
 	return complete
 

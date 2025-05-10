@@ -1,7 +1,24 @@
 [gd_scene load_steps=16 format=3 uid="uid://o144xq6t6fpb"]
 
-[ext_resource type="Script" uid="uid://cj40m4lx6dcaf" path="res://source/elements/goal.gd" id="1_77ohj"]
 [ext_resource type="Texture2D" uid="uid://mgnv8yigw7e6" path="res://assets/sprites/items/clock.png" id="2_77ohj"]
+
+[sub_resource type="GDScript" id="GDScript_4xci1"]
+script/source = "extends Area2D
+
+
+@export var triggered=false
+
+func _ready() -> void:
+		$anim.play(\"idle\")
+		
+func _on_body_entered(body: Node2D) -> void:
+	print(\"aloha 1\")
+	if body.is_in_group(\"player\") and !triggered:
+		Global.world.complete_stage()
+		triggered=true
+		$anim.play(\"trigger\")
+	pass # Replace with function body.
+"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_awhup"]
 atlas = ExtResource("2_77ohj")
@@ -104,7 +121,7 @@ size = Vector2(16, 16)
 
 [node name="goal" type="Area2D"]
 use_parent_material = true
-script = ExtResource("1_77ohj")
+script = SubResource("GDScript_4xci1")
 
 [node name="anim" type="AnimatedSprite2D" parent="."]
 use_parent_material = true
