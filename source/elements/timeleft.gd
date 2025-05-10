@@ -8,7 +8,10 @@ func  _process(delta: float) -> void:
 func start():
 	$Timer.start()
 	started=true
-	
+func stop():
+	$Timer.stop()
+	started=true
+
 func add_secs(sec := 60):
 	var remaining = $Timer.time_left
 	if $Timer.is_stopped():

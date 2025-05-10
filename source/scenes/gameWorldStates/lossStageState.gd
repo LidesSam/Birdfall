@@ -5,4 +5,8 @@ func enter(actowner):
 	super(actowner)
 	actowner.timeleft.start()
 	actowner.player.timeover()
-	#actowner.endPopup.show()
+	actowner.endpopupLbl.text = "Tou Loss... Try Again..."
+	actowner.endPopup.show()#move this toprocesss 
+func update(actowner,delta):
+	super(actowner,delta)
+	#here check if anim finished and then show the endpopup

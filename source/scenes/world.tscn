@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=4 uid="uid://dvvy75jb8tc0d"]
+[gd_scene load_steps=20 format=4 uid="uid://dvvy75jb8tc0d"]
 
 [ext_resource type="Texture2D" uid="uid://b33delcwra5dt" path="res://assets/sprites/tileset.png" id="1_0mw4y"]
 [ext_resource type="Material" uid="uid://dokqq7kuxo23v" path="res://assets/shaders/metallic-blue.tres" id="1_22jhh"]
@@ -7,12 +7,14 @@
 [ext_resource type="Texture2D" uid="uid://c46hkht4auqja" path="res://assets/sprites/Solid-shade.png" id="3_tl0iy"]
 [ext_resource type="PackedScene" uid="uid://ddskdoxd1qhi3" path="res://source/elements/cronoclock.tscn" id="5_nai4x"]
 [ext_resource type="PackedScene" uid="uid://d04x6pnkk63th" path="res://source/elements/timeleft.tscn" id="6_an0i8"]
+[ext_resource type="PackedScene" uid="uid://o144xq6t6fpb" path="res://source/elements/goal.tscn" id="6_kf3fs"]
+[ext_resource type="Script" uid="uid://cj40m4lx6dcaf" path="res://source/elements/goal.gd" id="6_scpiy"]
 [ext_resource type="Texture2D" uid="uid://b8oln5y4locpg" path="res://assets/sprites/solid-block.png" id="8_0iyr7"]
 [ext_resource type="Script" uid="uid://ct5qkh0wai5c5" path="res://addons/fsmgear/source/Fsm.gd" id="8_j1nvq"]
 [ext_resource type="Script" uid="uid://80m0h04t1ao7" path="res://source/scenes/gameWorldStates/startStageState.gd" id="9_od6b4"]
-[ext_resource type="Script" uid="uid://dk6fjngxkiftm" path="res://addons/fsmgear/source/FsmState.gd" id="10_mi3e2"]
 [ext_resource type="Script" uid="uid://dysw2chf8hifx" path="res://source/scenes/gameWorldStates/onStageState.gd" id="10_od6b4"]
 [ext_resource type="Script" uid="uid://bkh4e3qceynwt" path="res://source/scenes/gameWorldStates/lossStageState.gd" id="13_kf3fs"]
+[ext_resource type="Script" uid="uid://bqs5ofn6ip7xy" path="res://source/scenes/complete_stage.gd" id="13_scpiy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_22jhh"]
 texture = ExtResource("1_0mw4y")
@@ -122,9 +124,14 @@ use_parent_material = true
 
 [node name="Cronoclock" parent="Node2D" instance=ExtResource("5_nai4x")]
 position = Vector2(152, -144)
+script = ExtResource("6_scpiy")
 
 [node name="Cronoclock2" parent="Node2D" instance=ExtResource("5_nai4x")]
 position = Vector2(16, 80)
+script = ExtResource("6_scpiy")
+
+[node name="goal" parent="Node2D" instance=ExtResource("6_kf3fs")]
+position = Vector2(-112, 80)
 
 [node name="player" parent="." instance=ExtResource("2_mtj5w")]
 material = SubResource("ShaderMaterial_mtj5w")
@@ -184,10 +191,21 @@ texture = ExtResource("8_0iyr7")
 [node name="Label" type="Label" parent="hud/root/endpopup"]
 use_parent_material = true
 layout_mode = 0
-offset_left = 24.0
-offset_top = 65.0
+offset_left = 32.0
+offset_top = 121.0
 offset_right = 448.0
-offset_bottom = 128.0
+offset_bottom = 184.0
+text = "YOUR SCORE: 000000"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="hud/root/endpopup"]
+use_parent_material = true
+layout_mode = 0
+offset_left = 32.0
+offset_top = 56.0
+offset_right = 448.0
+offset_bottom = 119.0
 text = "YOUR SCORE: 000000"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -214,7 +232,7 @@ script = ExtResource("10_od6b4")
 metadata/_custom_type_script = "uid://dk6fjngxkiftm"
 
 [node name="completeStage" type="Node" parent="fsm"]
-script = ExtResource("10_mi3e2")
+script = ExtResource("13_scpiy")
 metadata/_custom_type_script = "uid://dk6fjngxkiftm"
 
 [node name="lossStage" type="Node" parent="fsm"]

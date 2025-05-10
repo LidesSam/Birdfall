@@ -65,16 +65,16 @@ region = Rect2(96, 0, 32, 32)
 [sub_resource type="SpriteFrames" id="6"]
 animations = [{
 "frames": [{
-"duration": 1.0,
+"duration": 2.0,
 "texture": SubResource("AtlasTexture_pcn01")
 }, {
-"duration": 1.0,
+"duration": 3.0,
 "texture": SubResource("AtlasTexture_42qtv")
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ri2j7")
 }, {
-"duration": 1.0,
+"duration": 10.0,
 "texture": SubResource("AtlasTexture_ajc0h")
 }],
 "loop": true,
@@ -170,7 +170,7 @@ position = Vector2(0, 24)
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 use_parent_material = true
 sprite_frames = SubResource("6")
-animation = &"falling"
+animation = &"walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)

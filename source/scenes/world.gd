@@ -14,11 +14,16 @@ extends Node2D
 @onready var countdown =$hud/root/countdownTimer
 
 @onready var endPopup =$hud/root/endpopup
+@onready var endPopupLbl =$hud/root/endpopup/Label
+@onready var endPopupScoreLbl =$hud/root/endpopup/ScoreLabel
+@onready var complete = false
 
 func _ready() -> void:
 	fsm.autoload(self)
 	fsm.addStateTransition("startStage","onStage",countdown_over)
 	fsm.addStateTransition("onStage","lossStage",timeleft.timeout)
+	
+	fsm.addStateTransition("onStage","completeStage",stage_is_complete)
 	fsm.startState()
 
 func _process(delta):
@@ -27,7 +32,17 @@ func _process(delta):
 #fsm flags	
 func countdown_over():
 	return countdown.time_left<=0
+func stage_is_complete():
+	return complete
 
+#setters
+#autosetters
+func complete_stage():
+	complete = true
+#manualsetters
+#set_value(value)
+#var = value
+#callbacks
 func _on_back_button_pressed() -> void:
 	ScreenTransition.change_scene_to_file("res://source/scenes/mainMenu.tscn")
 	pass # Replace with function body.
