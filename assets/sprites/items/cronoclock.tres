@@ -1,0 +1,85 @@
+[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://bhkflblqqvyb2"]
+
+[ext_resource type="Texture2D" uid="uid://mgnv8yigw7e6" path="res://assets/sprites/items/clock.png" id="1_u66ab"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_awhup"]
+atlas = ExtResource("1_u66ab")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shd2s"]
+atlas = ExtResource("1_u66ab")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2l8yw"]
+atlas = ExtResource("1_u66ab")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bmcun"]
+atlas = ExtResource("1_u66ab")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_maw0b"]
+atlas = ExtResource("1_u66ab")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6jqf7"]
+atlas = ExtResource("1_u66ab")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_klljy"]
+atlas = ExtResource("1_u66ab")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_11qnb"]
+atlas = ExtResource("1_u66ab")
+region = Rect2(96, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fatsq"]
+atlas = ExtResource("1_u66ab")
+region = Rect2(0, 64, 32, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_awhup")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shd2s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2l8yw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bmcun")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_maw0b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6jqf7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_klljy")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_11qnb")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_fatsq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_11qnb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fatsq")
+}],
+"loop": false,
+"name": &"trigger",
+"speed": 10.0
+}]

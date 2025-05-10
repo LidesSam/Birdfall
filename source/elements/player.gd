@@ -137,3 +137,6 @@ func get_wasDamaged():
 
 func _on_Timer_timeout():
 	wasDamaged=false
+func timeover():
+	death=true
+	play_animation("death")

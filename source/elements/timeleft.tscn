@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://d04x6pnkk63th"]
+
+[ext_resource type="Script" uid="uid://3l68bymafubh" path="res://source/elements/timeleft.gd" id="1_brrkg"]
+[ext_resource type="Texture2D" uid="uid://mgnv8yigw7e6" path="res://assets/sprites/items/clock.png" id="2_pqr3b"]
+[ext_resource type="Material" uid="uid://53t608ngttgd" path="res://assets/shaders/gum-cassata.tres" id="3_wkm4m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b050m"]
+atlas = ExtResource("2_pqr3b")
+region = Rect2(0, 0, 32, 32)
+
+[node name="timeleft" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = -96.0
+offset_right = 256.0
+offset_bottom = -64.0
+script = ExtResource("1_brrkg")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+use_parent_material = true
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = SubResource("AtlasTexture_b050m")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="Label" type="Label" parent="."]
+material = ExtResource("3_wkm4m")
+layout_mode = 0
+offset_left = 32.0
+offset_right = 72.0
+offset_bottom = 30.0
+theme_override_colors/font_color = Color(0.376471, 0.376471, 0.376471, 1)
+theme_override_colors/font_outline_color = Color(0.12549, 0.12549, 0.12549, 1)
+text = "asd"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true

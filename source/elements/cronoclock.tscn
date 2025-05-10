@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddskdoxd1qhi3"]
+
+[ext_resource type="Script" uid="uid://d3qo0m2pvbuuv" path="res://source/elements/cronoclock.gd" id="1_awhup"]
+[ext_resource type="SpriteFrames" uid="uid://bhkflblqqvyb2" path="res://assets/sprites/items/cronoclock.tres" id="2_awhup"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x0rya"]
+size = Vector2(16, 16)
+
+[node name="Cronoclock" type="Area2D"]
+use_parent_material = true
+script = ExtResource("1_awhup")
+
+[node name="anim" type="AnimatedSprite2D" parent="."]
+use_parent_material = true
+sprite_frames = ExtResource("2_awhup")
+animation = &"idle"
+frame_progress = 0.643817
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+use_parent_material = true
+shape = SubResource("RectangleShape2D_x0rya")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
