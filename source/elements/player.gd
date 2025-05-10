@@ -12,10 +12,11 @@ var tilemap=null
 var maxlp=3
 var lp=0
 var death=false
-var isJump=false
-var isGrounded =false
+var inJump=false
+var inGround =false
 var onDropDown=false
 var money=0
+
 @onready var fsm = $fsm
 
 
@@ -29,31 +30,43 @@ func _ready():
 	
 	fsm.set_owner(self)
 	fsm.autoload(self)
+	fsm.set_debug_on($lblstate)
+	
 	fsm.addGlobalTransition("idle",isOnGround)
-	fsm.addStateTransition("idle","jump",isJumping)
-	fsm.addGlobalTransition("falling",isFalling)
+	fsm.addGlobalTransition("fall",isFalling)
+	
+	fsm.addStateTransition("idle","jump",inJumping)
+	
 	fsm.startState()
 	
-	isGrounded =true
 	maxlp =3
 	lp=3
 	
-	play_animation("idle")
-	pass # Replace with function body.
 #state flags function
 func isFalling():
-		return velocity.y>0
-func isJumping():
-	return isJump
+	return velocity.y>0
+		
+func inJumping():
+	return inJump
+
+func isOnGround():
+	return inGround
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 
+func gravity_step():
+	velocity.y-=-9.8
+	if(velocity.y>=200):
+		velocity.y=200
+
 func _physics_process(delta):
+	gravity_step()
 
 	# Update grounded state from raycast
 	var raycollider = $RayCast2D.get_collider()
-	isGrounded = raycollider != null
+	inGround = raycollider != null and raycollider == tilemap
 
 	# Run FSM logic
 	fsm.fsmUpdate(delta)
@@ -92,8 +105,8 @@ func _input(event):
 		
 func jumpInput():
 	if( Input.is_action_just_pressed("ui_back")):
-		isJump=true
-		isGrounded=false
+		inJump=true
+		inGround=false
 		
 func sidemove():
 	if not(Input.is_action_pressed("ui_left")) and  not(Input.is_action_pressed("ui_right")):
@@ -118,12 +131,7 @@ func play_animation(animName):
 	$lblanim.text= str("anim:"+animName)
 	animation.play(animName)
 
-func updateStateName(stateName=""):
-	$lblstate.text= str("c-state: ",stateName ," j:",isJump," g:",isGrounded)
-
-func isOnGround():
-	pass
-		
+			
 func pick_item(item):
 		match(item.itemName):
 			"coin":
@@ -137,6 +145,7 @@ func get_wasDamaged():
 
 func _on_Timer_timeout():
 	wasDamaged=false
+	
 func timeover():
 	death=true
 	play_animation("death")

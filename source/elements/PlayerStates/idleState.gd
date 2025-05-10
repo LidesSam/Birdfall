@@ -5,6 +5,7 @@ var downFlag=false
 
 func enter(actowner):
 	actowner.play_animation("idle")
+	actowner.inJump=false
 	super(actowner)
 
 func handleInput(actowner,event):
