@@ -17,13 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*res://source/global.gd"
 ScreenTransition="*res://source/system/screenTransition.tscn"
-
-[display]
-
-window/size/viewport_width=640
-window/size/viewport_height=480
+Global="*res://source/global.gd"
 
 [editor_plugins]
 
@@ -31,4 +26,5 @@ enabled=PackedStringArray("res://addons/fsmgear/plugin.cfg")
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="mobile"

@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://dvvy75jb8tc0d"]
+[gd_scene load_steps=6 format=3 uid="uid://dvvy75jb8tc0d"]
 
 [ext_resource type="Texture2D" uid="uid://b33delcwra5dt" path="res://assets/sprites/tileset.png" id="1_0mw4y"]
-[ext_resource type="Material" uid="uid://dokqq7kuxo23v" path="res://assets/shaders/metallic-blue.tres" id="1_22jhh"]
 [ext_resource type="Script" uid="uid://bd5cl7hib232v" path="res://source/scenes/world.gd" id="1_mtj5w"]
 [ext_resource type="PackedScene" uid="uid://cjkdl4rpglr3s" path="res://source/elements/player.tscn" id="2_mtj5w"]
 
@@ -33,60 +32,7 @@ texture_region_size = Vector2i(32, 31)
 tile_size = Vector2i(32, 32)
 sources/0 = SubResource("TileSetAtlasSource_22jhh")
 
-[sub_resource type="Shader" id="1"]
-code = "shader_type canvas_item;
-uniform vec4 light : source_color;
-uniform vec4 normal : source_color;
-uniform vec4 shade : source_color;
-uniform vec4 outline : source_color;
-
-uniform vec4 swapLight : source_color;
-uniform vec4 swapNormal : source_color;
-uniform vec4 swapShade : source_color;
-uniform vec4 swapOutline : source_color;
-
-const float precision = 0.1;
-
-
-void fragment(){
-	vec4 current_color = texture(TEXTURE,UV);
-		if(distance(current_color,light)<=precision){
-			COLOR = swapLight;
-		}
-		else if(distance(current_color,normal)<=precision){
-			COLOR = swapNormal;
-		}
-		
-		else if(distance(current_color,shade)<=precision){
-			COLOR = swapShade;
-		}
-		else if(distance(current_color,outline)<=precision){
-			COLOR = swapOutline;
-		}
-		else{
-			COLOR = current_color;
-		}
-		
-		
-}
-
-"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mtj5w"]
-resource_local_to_scene = true
-shader = SubResource("1")
-shader_parameter/light = Color(0.87451, 0.87451, 0.87451, 1)
-shader_parameter/normal = Color(0.623529, 0.623529, 0.623529, 1)
-shader_parameter/shade = Color(0.376471, 0.376471, 0.376471, 1)
-shader_parameter/outline = Color(0.12549, 0.12549, 0.12549, 1)
-shader_parameter/swapLight = Color(0, 0, 0, 1)
-shader_parameter/swapNormal = Color(0.0392157, 0.580392, 0.807843, 1)
-shader_parameter/swapShade = Color(0, 0.0980392, 0.466667, 1)
-shader_parameter/swapOutline = Color(0.258824, 0.839216, 0.52549, 1)
-
 [node name="World" type="Node2D"]
-material = ExtResource("1_22jhh")
-use_parent_material = true
 script = ExtResource("1_mtj5w")
 
 [node name="Hud" type="Control" parent="."]
@@ -104,15 +50,12 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="TileMap" type="TileMap" parent="."]
-use_parent_material = true
 tile_set = SubResource("TileSet_nai4x")
 format = 2
 layer_0/tile_data = PackedInt32Array(65539, 0, 1, 3, 0, 1, -65533, 0, 1, -131069, 0, 1, -196605, 0, 1, -262141, 0, 1, -327677, 0, 1, -393213, 0, 1, -458749, 0, 1, -524285, 65536, 1, 262139, 0, 0, 262140, 0, 0, 262141, 0, 0, 262142, 0, 0, 262143, 0, 0, 196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 131075, 0, 1, 196603, 0, 1, 131067, 0, 1, 65531, 0, 1, -5, 0, 1, -65541, 0, 1, -131077, 0, 1, -196610, 65536, 1, -65538, 0, 1, -131074, 0, 1, -131072, 65536, 1, -65536, 0, 1)
 
 [node name="player" parent="." instance=ExtResource("2_mtj5w")]
-material = SubResource("ShaderMaterial_mtj5w")
-use_parent_material = true
 position = Vector2(-24, 64)
 
 [node name="Camera2D" type="Camera2D" parent="player"]
-zoom = Vector2(2, 2)
+visible = false
