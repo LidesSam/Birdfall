@@ -16,5 +16,8 @@ func update(actowner,delta):
 		actowner.countdownLbl.text = str("%01d" % round(actowner.countdown.time_left))
 		
 func exit(actowner):
-	super(actowner)
 	actowner.countdownLbl.hide()
+	Musicbox.start_play()
+	
+	super(actowner)
+	

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfiusyvvucuuw"]
+
+[ext_resource type="Script" uid="uid://cewgkwgc1k1al" path="res://source/system/musicbox.gd" id="1_am2s7"]
+[ext_resource type="AudioStream" uid="uid://ci4up7sdf0eed" path="res://assets/music/trina-v1-loop.tres" id="2_0xuh0"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_am2s7")
+
+[node name="MusicPlayerA" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_0xuh0")
+volume_db = -15.0
+
+[node name="MusicPlayerB" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_0xuh0")
+volume_db = -15.0
+stream_paused = true
+
+[connection signal="finished" from="MusicPlayerA" to="." method="_on_music_player_finished"]
+[connection signal="finished" from="MusicPlayerB" to="." method="_on_music_player_finished"]

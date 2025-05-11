@@ -4,7 +4,8 @@ func enter(actowner):
 	super(actowner)
 	actowner.timeleft.stop()
 	actowner.endPopup.show()
-	actowner.endPopupLbl.text = "complete!! thanks for playing"
+	actowner.endPopupLbl.text = "complete!! thanks for playing" 
+	Musicbox.stop()
 	
 func update(actower,delta):
 	super(actower,delta)
