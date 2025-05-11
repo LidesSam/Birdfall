@@ -13,3 +13,6 @@ func update(actowner,delta):
 	if actowner.countdown.time_left<=3:
 		actowner.countdownLbl.text = str("%01d" % round(actowner.countdown.time_left))
 		
+func exit(actowner):
+	super(actowner)
+	actowner.countdownLbl.hide()

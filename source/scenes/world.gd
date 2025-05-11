@@ -26,6 +26,7 @@ func _ready() -> void:
 	
 	fsm.addStateTransition("onStage","completeStage",stage_is_complete)
 	fsm.startState()
+	auto_set_shadder()
 
 func _process(delta):
 	fsm.fsmUpdate(delta)
@@ -45,6 +46,8 @@ func complete_stage():
 #var = value
 func auto_set_shadder():
 	self.material=Global.currentShadder
+	$hud/root.material =material
+	
 func update_hud():
 	var scoretext="SCORE:"+ str("%06d" % Global.score)
 	$hud/root/score.text = scoretext

@@ -31,6 +31,10 @@ window/stretch/mode="viewport"
 
 enabled=PackedStringArray("res://addons/fsmgear/plugin.cfg")
 
+[gui]
+
+theme/custom_font="uid://briskctqaevp3"
+
 [input]
 
 ui_back={

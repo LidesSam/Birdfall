@@ -2,6 +2,7 @@ extends Control
 
 
 func ready():
+	self.material= Global.currentShadder
 	ScreenTransition.play_intro_anim("fill_up")
 	$ScoreTag.text = "YourScore: " + str("%06d" % Global.Score)
 
