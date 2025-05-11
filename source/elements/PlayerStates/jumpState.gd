@@ -8,7 +8,7 @@ func enter(actowner):
 	actowner.play_animation("jumping")
 	if($jumpSfx):
 		$jumpSfx.play()
-		$jumpSfx.pitch_scale= 1.0 + randi()%5-2*0.05
+		$jumpSfx.pitch_scale= 1.0 + (randi()%5-2)*0.05
 	
 	
 func handleInput(actowner,event):

@@ -281,6 +281,7 @@ metadata/_custom_type_script = "uid://dk6fjngxkiftm"
 
 [node name="deadSfx" type="AudioStreamPlayer2D" parent="fsm/die"]
 stream = ExtResource("16_4u6ny")
+volume_db = 5.0
 
 [node name="onPeckTimer" type="Timer" parent="."]
 one_shot = true

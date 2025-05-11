@@ -10,7 +10,7 @@ func enter(actowner):
 	
 	if($peckSfx):
 		$peckSfx.play()
-		$peckSfx.pitch_scale= 1.0 + randi()%5-2*0.05
+		$peckSfx.pitch_scale= 1.0 + (randi()%5)-2*0.05
 	
 	
 func exit(actowner):
