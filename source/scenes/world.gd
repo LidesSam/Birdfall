@@ -48,6 +48,10 @@ func complete_stage():
 func auto_set_shadder():
 	self.material=Global.currentShadder
 	$hud/root.material =material
+	#set sec material
+	player.material=Global.currentSecShadder
+	$Seeds.material=Global.currentSecShadder
+	$triggers.material=Global.currentSecShadder
 	
 func update_hud():
 	var scoretext="SCORE:"+ str("%06d" % Global.score)
