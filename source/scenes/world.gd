@@ -27,7 +27,6 @@ func _ready() -> void:
 	
 	fsm.addStateTransition("onStage","completeStage",stage_is_complete)
 	fsm.startState()
-	auto_set_shadder()
 
 func _process(delta):
 	fsm.fsmUpdate(delta)

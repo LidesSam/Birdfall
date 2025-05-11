@@ -264,5 +264,9 @@ metadata/_custom_type_script = "uid://dk6fjngxkiftm"
 script = ExtResource("13_4qmrp")
 metadata/_custom_type_script = "uid://dk6fjngxkiftm"
 
+[node name="onPeckTimer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="animation_finished" from="AnimatedSprite" to="fsm/die" method="_on_animated_sprite_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="timeout" from="onPeckTimer" to="." method="_on_on_peck_timer_timeout"]

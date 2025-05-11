@@ -5,10 +5,13 @@ func enter(actowner):
 	actowner.sideCollisionSensor.enabled=true;
 	actowner.sideCollisionSensor.target_position =Vector2(10*actowner.d,0);
 	actowner.velocity= Vector2(300*actowner.d,0)
-	actowner.inPecking=true
 	actowner.inJump=false
+	actowner.get_node("onPeckTimer").start()
 	
 	
 func exit(actowner):
+	super(actowner)
+	actowner.velocity=Vector2(0,0)
 	#actowner.sideCollisionSensor.enabled=false;
 	actowner.inPecking=false
+	actowner.get_node("onPeckTimer").stop()

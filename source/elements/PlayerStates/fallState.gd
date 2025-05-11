@@ -3,7 +3,9 @@ extends "res://addons/fsmgear/source/FsmState.gd"
 func enter(actowner):
 	super(actowner)
 	actowner.inGround=false
+	actowner.sideCollisionSensor.enabled=false
 	actowner.play_animation("falling")
+	
 
 func handleInput(actowner,event):
 	super(actowner,event)

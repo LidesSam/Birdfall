@@ -7,6 +7,8 @@ func enter(actowner):
 	actowner.hud = Global.currentShadder
 	actowner.material = Global.currentShadder
 	actowner.countdown.start()
+	actowner.update_hud()
+	actowner.auto_set_shadder()
 	
 func update(actowner,delta):
 	super(actowner,delta)

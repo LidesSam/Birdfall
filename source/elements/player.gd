@@ -54,6 +54,7 @@ func _ready():
 	fsm.addStateTransition("jump","peck",isPecking)
 	fsm.addStateTransition("fall","peck",isPecking)
 	
+	fsm.addStateTransition("peck","fall",outPecking)
 	fsm.addStateTransition("peck","hang-wall",isToHangOn)
 	
 	fsm.addStateTransition("hang-wall","jump",inJumping)
@@ -70,6 +71,8 @@ func isFalling():
 	
 func isPecking():
 	return inPecking
+func outPecking():
+	return !inPecking
 	
 func isToHangOn():
 	return isPecking() and hit_a_wall()
@@ -109,10 +112,10 @@ func _physics_process(delta):
 			move_and_slide()
 
 		if !hit_a_wall() and sideCollisionSensor.enabled:
-			modulate = "#ff0"  # yellow while checking
+			#modulate = "#ff0"  # yellow while checking
 			sideCollisionSensor.force_raycast_update()
 			if sideCollisionSensor.is_colliding():
-				modulate = "#f0f"  # pink when colliding
+				#modulate = "#f0f"  # pink when colliding
 				justHitWall = true
 		# Check for collisions (e.g., item pickups)
 		# Failsafe hazard check on collision position
@@ -201,3 +204,11 @@ func _on_Timer_timeout():
 func timeover():
 	death=true
 	play_animation("death")
+
+
+func _on_on_peck_timer_timeout() -> void:
+	$onPeckTimer.stop()
+	if(isPecking()):
+		inPecking=false
+	print("peck out")
+	pass # Replace with function body.
