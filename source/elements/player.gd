@@ -1,8 +1,12 @@
 extends CharacterBody2D
 
 # Called when the node enters the scene tree for the first time.
-var d=1
+var DIR_LEFT = -1
+var DIR_RIGHT = 1
+var d=-1
+
 var speed=200
+var money=0
 
 #reftoparentNodes
 var hud=null
@@ -11,16 +15,20 @@ var tilemap=null
 #lifepoints
 var maxlp=3
 var lp=0
+
+
 var death=false
 var inJump=false
 var inGround =false
 var onDropDown=false
-var money=0
+var inPecking=false
+var justHitWall = false	
+
 
 @onready var fsm = $fsm
-
-
 @onready var animation=$AnimatedSprite
+
+@onready var sideCollisionSensor=$RayCastSide
 @onready var dmgCooldown = $Timer
 @onready var wasDamaged = false
 
@@ -33,9 +41,19 @@ func _ready():
 	fsm.set_debug_on($lblstate)
 	
 	fsm.addGlobalTransition("idle",isOnGround)
-	fsm.addGlobalTransition("fall",isFalling)
+	
+	#fsm.addStateTransition("idle","fall",isFalling)
+	#fsm.addStateTransition("jump","fall",isFalling)
 	
 	fsm.addStateTransition("idle","jump",inJumping)
+	
+	fsm.addStateTransition("idle","peck",isPecking)
+	fsm.addStateTransition("jump","peck",isPecking)
+	fsm.addStateTransition("fall","peck",isPecking)
+	
+	fsm.addStateTransition("peck","hang-wall",isToHangOn)
+	
+	fsm.addStateTransition("hang-wall","jump",inJumping)
 	
 	fsm.startState()
 	
@@ -44,14 +62,23 @@ func _ready():
 	
 #state flags function
 func isFalling():
-	return velocity.y>0
+	return !isOnGround() and velocity.y>0
+	
+func isPecking():
+	return inPecking
+	
+func isToHangOn():
+	return isPecking() and hit_a_wall()
 		
+func hit_a_wall():
+	return justHitWall	
+	
 func inJumping():
 	return inJump
 
 func isOnGround():
 	return inGround
-	
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
@@ -62,7 +89,8 @@ func gravity_step():
 		velocity.y=200
 
 func _physics_process(delta):
-	gravity_step()
+	if(!hit_a_wall()):
+		gravity_step()
 
 	# Update grounded state from raycast
 	var raycollider = $RayCast2D.get_collider()
@@ -72,13 +100,21 @@ func _physics_process(delta):
 	fsm.fsmUpdate(delta)
 
 	# Move character using Godot's built-in method
-	move_and_slide()
+	if(!hit_a_wall()):
+		move_and_slide()
 
 	# Check for collisions (e.g., item pickups)
 	for i in range(get_slide_collision_count()):
 		var collision = get_slide_collision(i)
 #		if collision.collider.has_method("is_in_group") and collision.collider.is_in_group("items"):
 #			pick_item(collision.collider)
+		# Wall detection using side ray
+	if !hit_a_wall() and sideCollisionSensor.enabled:
+		modulate = "#ff0"  # yellow while checking
+		sideCollisionSensor.force_raycast_update()
+		if sideCollisionSensor.is_colliding():
+			modulate = "#f0f"  # pink when colliding
+			justHitWall = true
 
 func hurt(points):	
 	lp-=points
@@ -92,34 +128,35 @@ func hurt(points):
 func _input(event):		
 	fsm.handleInput(event)
 	
-	if  event.is_action_pressed("ui_left"):
-		d=-1
-		velocity.x=-100 
-
-		$AnimatedSprite.flip_h=false# invert afther remove pkaceholder
-	else:
-		if  event.is_action_pressed("ui_right"):
-			
-			velocity.x=100 
-			$AnimatedSprite.flip_h=true# invert afther remove pkaceholder
+	#if  event.is_action_pressed("ui_left"):
+	#	d=-1
+	#	velocity.x=-100 
+	#	$AnimatedSprite.flip_h=false# invert afther remove pkaceholder
+	#else:
+	#	if  event.is_action_pressed("ui_right"):
+	#		velocity.x=100 
+	#		$AnimatedSprite.flip_h=true# invert afther remove pkaceholder
 		
 func jumpInput():
 	if( Input.is_action_just_pressed("ui_back")):
 		inJump=true
 		inGround=false
 		
+func peckInput():
+	if( Input.is_action_just_pressed("ui_action")):
+		inPecking=true	
+		
 func sidemove():
+	if (Input.is_action_pressed("ui_left")):
+		d=DIR_LEFT
+		$AnimatedSprite.flip_h=true 
+	if (Input.is_action_pressed("ui_right")):
+		d=DIR_RIGHT
+		$AnimatedSprite.flip_h=false 
 	if not(Input.is_action_pressed("ui_left")) and  not(Input.is_action_pressed("ui_right")):
 		velocity.x=0
 	else:
 		velocity.x=speed*d
-	if (Input.is_action_pressed("ui_left")):
-		d=-1
-		$AnimatedSprite.flip_h=true # invert afther remove pkaceholder
-	if (Input.is_action_pressed("ui_right")):
-		
-		d=1
-		$AnimatedSprite.flip_h=false # invert afther remove pkaceholder
 
 func setHud(HUD):
 	hud=HUD

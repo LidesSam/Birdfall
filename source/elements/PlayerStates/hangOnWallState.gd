@@ -1,19 +1,20 @@
 extends "res://addons/fsmgear/source/FsmState.gd"
 
-#jumpstate
 func enter(actowner):
-	actowner.inGround=false
-	actowner.velocity.y=-300
+	super(actowner)
+	actowner.play_animation("hang-on")
+	actowner.velocity.y=0
 	actowner.sideCollisionSensor.enabled=false
-	actowner.play_animation("jumping")
+
+	
+func update(actowner, delta):
+	super(actowner, delta)
+	actowner.velocity.y=0
 	
 func handleInput(actowner,event):
 	super(actowner,event)
-	actowner.peckInput()
-	actowner.sidemove()
-
-func update(actowner,delta):
-	actowner.sidemove()
-
+	actowner.jumpInput()
+	
 func exit(actowner):
 	super(actowner)
+	actowner.justHitWall=false

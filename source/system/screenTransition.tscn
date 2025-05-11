@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://vlffbuftu4r"]
+[gd_scene load_steps=9 format=3 uid="uid://vlffbuftu4r"]
 
 [ext_resource type="Script" uid="uid://b6qrd4yegipwi" path="res://source/system/screenTransition.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://c46hkht4auqja" path="res://assets/sprites/Solid-shade.png" id="2_7nxdg"]
 [ext_resource type="Texture2D" uid="uid://b8oln5y4locpg" path="res://assets/sprites/solid-block.png" id="3_yu28p"]
 [ext_resource type="Material" uid="uid://dokqq7kuxo23v" path="res://assets/shaders/metallic-blue.tres" id="4_0brhw"]
+[ext_resource type="Texture2D" uid="uid://y6wemekgqrm5" path="res://assets/sprites/background-bands.png" id="5_lgq6m"]
 
 [sub_resource type="Animation" id="Animation_ya4bd"]
 length = 5.0
@@ -56,7 +57,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.6, 0.7, 0.8, 0.9, 1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("2_7nxdg"), ExtResource("3_yu28p"), ExtResource("2_7nxdg"), ExtResource("3_yu28p"), ExtResource("2_7nxdg"), ExtResource("3_yu28p")]
+"values": [ExtResource("5_lgq6m"), ExtResource("3_yu28p"), ExtResource("2_7nxdg"), ExtResource("3_yu28p"), ExtResource("2_7nxdg"), ExtResource("3_yu28p")]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -92,7 +93,7 @@ offset_top = 640.0
 offset_right = 1840.0
 offset_bottom = 1288.0
 mouse_filter = 2
-texture = ExtResource("2_7nxdg")
+texture = ExtResource("5_lgq6m")
 stretch_mode = 1
 
 [connection signal="animation_finished" from="anim" to="." method="_on_anim_animation_finished"]

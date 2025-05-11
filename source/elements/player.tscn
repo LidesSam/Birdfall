@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cjkdl4rpglr3s"]
+[gd_scene load_steps=32 format=3 uid="uid://cjkdl4rpglr3s"]
 
 [ext_resource type="Texture2D" uid="uid://bxgg7udom7vik" path="res://assets/sprites/player/bf-stand.png" id="1_b1ete"]
 [ext_resource type="Script" uid="uid://db8ucos1u41dd" path="res://source/elements/player.gd" id="1_bmqvs"]
@@ -10,6 +10,8 @@
 [ext_resource type="Script" uid="uid://dfqrqgjnf101j" path="res://source/elements/PlayerStates/jumpState.gd" id="4_f8b30"]
 [ext_resource type="Texture2D" uid="uid://ck5gnrc1jq8qb" path="res://assets/sprites/player/bf-walk.png" id="6_ajc0h"]
 [ext_resource type="Script" uid="uid://dkwvnawd7nxem" path="res://source/elements/PlayerStates/fallState.gd" id="8_pcn01"]
+[ext_resource type="Script" uid="uid://jio8f6xrbxl5" path="res://source/elements/PlayerStates/peckState.gd" id="11_prp6d"]
+[ext_resource type="Script" uid="uid://1s5roaabdb7d" path="res://source/elements/PlayerStates/hangOnWallState.gd" id="12_prp6d"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pcn01"]
 atlas = ExtResource("1_ih8om")
@@ -38,6 +40,10 @@ region = Rect2(0, 0, 32, 32)
 atlas = ExtResource("3_bmqvs")
 region = Rect2(32, 0, 32, 32)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_yti1m"]
+atlas = ExtResource("3_bmqvs")
+region = Rect2(0, 0, 32, 32)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_gcasc"]
 atlas = ExtResource("1_b1ete")
 region = Rect2(0, 0, 32, 32)
@@ -45,6 +51,18 @@ region = Rect2(0, 0, 32, 32)
 [sub_resource type="AtlasTexture" id="AtlasTexture_1el1x"]
 atlas = ExtResource("3_bmqvs")
 region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_t0y47"]
+atlas = ExtResource("3_bmqvs")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uknfx"]
+atlas = ExtResource("3_bmqvs")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4slxa"]
+atlas = ExtResource("3_bmqvs")
+region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eh3en"]
 atlas = ExtResource("6_ajc0h")
@@ -108,6 +126,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_yti1m")
+}],
+"loop": true,
+"name": &"hang-on",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_gcasc")
 }],
 "loop": true,
@@ -120,6 +146,23 @@ animations = [{
 }],
 "loop": true,
 "name": &"jumping",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t0y47")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uknfx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_t0y47")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4slxa")
+}],
+"loop": false,
+"name": &"peck",
 "speed": 5.0
 }, {
 "frames": [{
@@ -170,7 +213,7 @@ position = Vector2(0, 24)
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 use_parent_material = true
 sprite_frames = SubResource("6")
-animation = &"walk"
+animation = &"peck"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
@@ -179,6 +222,10 @@ shape = SubResource("7")
 [node name="RayCast2D" type="RayCast2D" parent="."]
 position = Vector2(0, 16)
 target_position = Vector2(0, 4)
+
+[node name="RayCastSide" type="RayCast2D" parent="."]
+enabled = false
+target_position = Vector2(10, 0)
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true
@@ -196,6 +243,14 @@ metadata/_custom_type_script = "uid://dk6fjngxkiftm"
 
 [node name="fall" type="Node" parent="fsm"]
 script = ExtResource("8_pcn01")
+metadata/_custom_type_script = "uid://dk6fjngxkiftm"
+
+[node name="peck" type="Node" parent="fsm"]
+script = ExtResource("11_prp6d")
+metadata/_custom_type_script = "uid://dk6fjngxkiftm"
+
+[node name="hang-wall" type="Node" parent="fsm"]
+script = ExtResource("12_prp6d")
 metadata/_custom_type_script = "uid://dk6fjngxkiftm"
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
