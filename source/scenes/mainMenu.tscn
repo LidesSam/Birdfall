@@ -1,6 +1,5 @@
-[gd_scene load_steps=9 format=3 uid="uid://dgit5s22n1xgq"]
+[gd_scene load_steps=8 format=3 uid="uid://dgit5s22n1xgq"]
 
-[ext_resource type="Material" uid="uid://dokqq7kuxo23v" path="res://assets/shaders/metallic-blue.tres" id="1_jx8sb"]
 [ext_resource type="Script" uid="uid://ia0ndaruol40" path="res://source/scenes/mainMenu.gd" id="1_ordc7"]
 [ext_resource type="Texture2D" uid="uid://b0yp2y0v4vw61" path="res://assets/sprites/background-tile-square-w.png" id="2_6pn21"]
 [ext_resource type="Texture2D" uid="uid://b8oln5y4locpg" path="res://assets/sprites/solid-block.png" id="3_gsaqs"]
@@ -10,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://1kxn88t42pbw" path="res://assets/sprites/system/play-button/play-btn-hover.png" id="8_jx8sb"]
 
 [node name="mainMenu" type="Control"]
-material = ExtResource("1_jx8sb")
+use_parent_material = true
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

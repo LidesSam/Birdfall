@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-ScreenTransition="*res://source/system/screenTransition.tscn"
 Global="*res://source/global.gd"
+ScreenTransition="*res://source/system/screenTransition.tscn"
 
 [display]
 
