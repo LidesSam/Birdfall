@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cjkdl4rpglr3s"]
+[gd_scene load_steps=33 format=3 uid="uid://cjkdl4rpglr3s"]
 
 [ext_resource type="Texture2D" uid="uid://bxgg7udom7vik" path="res://assets/sprites/player/bf-stand.png" id="1_b1ete"]
 [ext_resource type="Script" uid="uid://db8ucos1u41dd" path="res://source/elements/player.gd" id="1_bmqvs"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://dkwvnawd7nxem" path="res://source/elements/PlayerStates/fallState.gd" id="8_pcn01"]
 [ext_resource type="Script" uid="uid://jio8f6xrbxl5" path="res://source/elements/PlayerStates/peckState.gd" id="11_prp6d"]
 [ext_resource type="Script" uid="uid://1s5roaabdb7d" path="res://source/elements/PlayerStates/hangOnWallState.gd" id="12_prp6d"]
+[ext_resource type="Script" uid="uid://s7pc3porr46m" path="res://source/elements/PlayerStates/dyingState.gd" id="13_4qmrp"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pcn01"]
 atlas = ExtResource("1_ih8om")
@@ -92,10 +93,16 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ri2j7")
 }, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_ajc0h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ri2j7")
+}, {
 "duration": 10.0,
 "texture": SubResource("AtlasTexture_ajc0h")
 }],
-"loop": true,
+"loop": false,
 "name": &"dead",
 "speed": 5.0
 }, {
@@ -213,7 +220,7 @@ position = Vector2(0, 24)
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 use_parent_material = true
 sprite_frames = SubResource("6")
-animation = &"peck"
+animation = &"falling"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
@@ -253,4 +260,9 @@ metadata/_custom_type_script = "uid://dk6fjngxkiftm"
 script = ExtResource("12_prp6d")
 metadata/_custom_type_script = "uid://dk6fjngxkiftm"
 
+[node name="die" type="Node" parent="fsm"]
+script = ExtResource("13_4qmrp")
+metadata/_custom_type_script = "uid://dk6fjngxkiftm"
+
+[connection signal="animation_finished" from="AnimatedSprite" to="fsm/die" method="_on_animated_sprite_animation_finished"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

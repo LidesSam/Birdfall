@@ -23,7 +23,7 @@ func _ready() -> void:
 	$hud/root.show()
 	fsm.autoload(self)
 	fsm.addStateTransition("startStage","onStage",countdown_over)
-	fsm.addStateTransition("onStage","lossStage",timeleft.timeout)
+	fsm.addStateTransition("onStage","lossStage",loss)
 	
 	fsm.addStateTransition("onStage","completeStage",stage_is_complete)
 	fsm.startState()
@@ -38,6 +38,8 @@ func countdown_over():
 	
 func stage_is_complete():
 	return complete
+func loss():
+	return timeleft.timeout() or player.death
 #setters
 #autosetters
 func complete_stage():

@@ -3,7 +3,7 @@ extends "res://addons/fsmgear/source/FsmState.gd"
 func enter(actowner):
 	super(actowner)
 	actowner.inGround=false
-	actowner.play_animation("fall")
+	actowner.play_animation("falling")
 
 func handleInput(actowner,event):
 	super(actowner,event)

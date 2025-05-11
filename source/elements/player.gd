@@ -18,6 +18,7 @@ var lp=0
 
 
 var death=false
+var dying=false
 var inJump=false
 var inGround =false
 var onDropDown=false
@@ -40,10 +41,12 @@ func _ready():
 	fsm.autoload(self)
 	fsm.set_debug_on($lblstate)
 	
-	fsm.addGlobalTransition("idle",isOnGround)
+	fsm.addGlobalTransition("die",isDying)
 	
-	#fsm.addStateTransition("idle","fall",isFalling)
-	#fsm.addStateTransition("jump","fall",isFalling)
+	fsm.addStateTransition("fall","idle",isOnGround)
+	
+	fsm.addStateTransition("idle","fall",isFalling)
+	fsm.addStateTransition("jump","fall",isFalling)
 	
 	fsm.addStateTransition("idle","jump",inJumping)
 	
@@ -54,6 +57,7 @@ func _ready():
 	fsm.addStateTransition("peck","hang-wall",isToHangOn)
 	
 	fsm.addStateTransition("hang-wall","jump",inJumping)
+	
 	
 	fsm.startState()
 	
@@ -76,8 +80,11 @@ func hit_a_wall():
 func inJumping():
 	return inJump
 
+func isDying():
+	return dying
+	
 func isOnGround():
-	return inGround
+	return inGround and !isDying()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -89,33 +96,41 @@ func gravity_step():
 		velocity.y=200
 
 func _physics_process(delta):
-	if(!hit_a_wall()):
-		gravity_step()
+	if(!isDying()):
+		if(!hit_a_wall()):
+			gravity_step()
 
-	# Update grounded state from raycast
-	var raycollider = $RayCast2D.get_collider()
-	inGround = raycollider != null and raycollider == tilemap
+		# Update grounded state from raycast
+		var raycollider = $RayCast2D.get_collider()
+		inGround = raycollider != null and raycollider == tilemap
 
+		# Move character using Godot's built-in method
+		if(!hit_a_wall()):
+			move_and_slide()
+
+		if !hit_a_wall() and sideCollisionSensor.enabled:
+			modulate = "#ff0"  # yellow while checking
+			sideCollisionSensor.force_raycast_update()
+			if sideCollisionSensor.is_colliding():
+				modulate = "#f0f"  # pink when colliding
+				justHitWall = true
+		# Check for collisions (e.g., item pickups)
+		# Failsafe hazard check on collision position
+		for i in range(get_slide_collision_count()):
+			var collision = get_slide_collision(i)
+			var collision_pos = collision.get_position()
+			var tile_pos = tilemap.local_to_map(collision_pos)
+			print("cheking group")
+			var tile_data = tilemap.get_cell_tile_data(tile_pos)
+			
+			if tile_data:
+				if tile_data.get_custom_data("group") == "hazard" and !isDying():
+					print("dying:",dying)
+					dying = true
+					print("dying p:",dying)
+			
 	# Run FSM logic
-	fsm.fsmUpdate(delta)
-
-	# Move character using Godot's built-in method
-	if(!hit_a_wall()):
-		move_and_slide()
-
-	# Check for collisions (e.g., item pickups)
-	for i in range(get_slide_collision_count()):
-		var collision = get_slide_collision(i)
-#		if collision.collider.has_method("is_in_group") and collision.collider.is_in_group("items"):
-#			pick_item(collision.collider)
-		# Wall detection using side ray
-	if !hit_a_wall() and sideCollisionSensor.enabled:
-		modulate = "#ff0"  # yellow while checking
-		sideCollisionSensor.force_raycast_update()
-		if sideCollisionSensor.is_colliding():
-			modulate = "#f0f"  # pink when colliding
-			justHitWall = true
-
+	fsm.fsmUpdate(delta)	
 func hurt(points):	
 	lp-=points
 	if lp<=0:

@@ -5,7 +5,7 @@ func enter(actowner):
 	super(actowner)
 	actowner.timeleft.start()
 	actowner.player.timeover()
-	actowner.endpopupLbl.text = "Tou Loss... Try Again..."
+	actowner.endPopupLbl.text = "Tou Loss... Try Again..."
 	actowner.endPopup.show()#move this toprocesss 
 func update(actowner,delta):
 	super(actowner,delta)
