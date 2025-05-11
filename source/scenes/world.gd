@@ -20,6 +20,7 @@ extends Node2D
 
 func _ready() -> void:
 	Global.score=0
+	$hud/root.show()
 	fsm.autoload(self)
 	fsm.addStateTransition("startStage","onStage",countdown_over)
 	fsm.addStateTransition("onStage","lossStage",timeleft.timeout)
@@ -51,7 +52,7 @@ func auto_set_shadder():
 func update_hud():
 	var scoretext="SCORE:"+ str("%06d" % Global.score)
 	$hud/root/score.text = scoretext
-	$hud/root/endpopup/scoreLabel.endpopup = scoretext
+	$hud/root/endpopup/ScoreLabel.text = scoretext
 	
 #callbacks
 func _on_back_button_pressed() -> void:
