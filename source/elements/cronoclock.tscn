@@ -13,11 +13,11 @@ script = ExtResource("1_awhup")
 [node name="anim" type="AnimatedSprite2D" parent="."]
 use_parent_material = true
 sprite_frames = ExtResource("2_awhup")
-animation = &"idle"
-frame_progress = 0.643817
+animation = &"trigger"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 use_parent_material = true
 shape = SubResource("RectangleShape2D_x0rya")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="animation_finished" from="anim" to="." method="_on_anim_animation_finished"]

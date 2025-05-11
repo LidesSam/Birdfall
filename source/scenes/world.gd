@@ -35,7 +35,6 @@ func countdown_over():
 	
 func stage_is_complete():
 	return complete
-
 #setters
 #autosetters
 func complete_stage():
@@ -43,6 +42,9 @@ func complete_stage():
 #manualsetters
 #set_value(value)
 #var = value
+func auto_set_shadder():
+	self.material=Global.currentShadder
+	
 #callbacks
 func _on_back_button_pressed() -> void:
 	ScreenTransition.change_scene_to_file("res://source/scenes/mainMenu.tscn")
