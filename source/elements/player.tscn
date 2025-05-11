@@ -199,6 +199,7 @@ material = ExtResource("1_ri2j7")
 script = ExtResource("1_bmqvs")
 
 [node name="lblstate" type="Label" parent="."]
+visible = false
 offset_left = -40.0
 offset_top = -32.0
 offset_right = 64.0
@@ -207,6 +208,7 @@ text = "Current State
 "
 
 [node name="lblanim" type="Label" parent="."]
+visible = false
 offset_left = -40.0
 offset_top = -48.0
 offset_right = 64.0
