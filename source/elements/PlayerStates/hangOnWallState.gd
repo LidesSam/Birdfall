@@ -5,6 +5,9 @@ func enter(actowner):
 	actowner.play_animation("hang-on")
 	actowner.velocity.y=0
 	actowner.sideCollisionSensor.enabled=false
+	if($peckSfx):
+		$peckSfx.play()
+		$peckSfx.pitch_scale= 0.6 + randi()%5-2*0.02
 
 	
 func update(actowner, delta):

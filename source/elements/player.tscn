@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cjkdl4rpglr3s"]
+[gd_scene load_steps=35 format=3 uid="uid://cjkdl4rpglr3s"]
 
 [ext_resource type="Texture2D" uid="uid://bxgg7udom7vik" path="res://assets/sprites/player/bf-stand.png" id="1_b1ete"]
 [ext_resource type="Script" uid="uid://db8ucos1u41dd" path="res://source/elements/player.gd" id="1_bmqvs"]
@@ -10,9 +10,11 @@
 [ext_resource type="Script" uid="uid://dfqrqgjnf101j" path="res://source/elements/PlayerStates/jumpState.gd" id="4_f8b30"]
 [ext_resource type="Texture2D" uid="uid://ck5gnrc1jq8qb" path="res://assets/sprites/player/bf-walk.png" id="6_ajc0h"]
 [ext_resource type="Script" uid="uid://dkwvnawd7nxem" path="res://source/elements/PlayerStates/fallState.gd" id="8_pcn01"]
+[ext_resource type="AudioStream" uid="uid://bx7epsc7jsytx" path="res://assets/sfx/jumpSfx.wav" id="10_1el1x"]
 [ext_resource type="Script" uid="uid://jio8f6xrbxl5" path="res://source/elements/PlayerStates/peckState.gd" id="11_prp6d"]
 [ext_resource type="Script" uid="uid://1s5roaabdb7d" path="res://source/elements/PlayerStates/hangOnWallState.gd" id="12_prp6d"]
 [ext_resource type="Script" uid="uid://s7pc3porr46m" path="res://source/elements/PlayerStates/dyingState.gd" id="13_4qmrp"]
+[ext_resource type="AudioStream" uid="uid://ctfffoduyxgtd" path="res://assets/sfx/peck.wav" id="13_eh3en"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pcn01"]
 atlas = ExtResource("1_ih8om")
@@ -250,6 +252,9 @@ metadata/_custom_type_script = "uid://dk6fjngxkiftm"
 script = ExtResource("4_f8b30")
 metadata/_custom_type_script = "uid://dk6fjngxkiftm"
 
+[node name="jumpSfx" type="AudioStreamPlayer2D" parent="fsm/jump"]
+stream = ExtResource("10_1el1x")
+
 [node name="fall" type="Node" parent="fsm"]
 script = ExtResource("8_pcn01")
 metadata/_custom_type_script = "uid://dk6fjngxkiftm"
@@ -258,9 +263,16 @@ metadata/_custom_type_script = "uid://dk6fjngxkiftm"
 script = ExtResource("11_prp6d")
 metadata/_custom_type_script = "uid://dk6fjngxkiftm"
 
+[node name="peckSfx" type="AudioStreamPlayer2D" parent="fsm/peck"]
+stream = ExtResource("13_eh3en")
+
 [node name="hang-wall" type="Node" parent="fsm"]
 script = ExtResource("12_prp6d")
 metadata/_custom_type_script = "uid://dk6fjngxkiftm"
+
+[node name="peckSfx" type="AudioStreamPlayer2D" parent="fsm/hang-wall"]
+stream = ExtResource("13_eh3en")
+pitch_scale = 0.6
 
 [node name="die" type="Node" parent="fsm"]
 script = ExtResource("13_4qmrp")

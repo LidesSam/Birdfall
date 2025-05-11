@@ -8,6 +8,10 @@ func enter(actowner):
 	actowner.inJump=false
 	actowner.get_node("onPeckTimer").start()
 	
+	if($peckSfx):
+		$peckSfx.play()
+		$peckSfx.pitch_scale= 1.0 + randi()%5-2*0.05
+	
 	
 func exit(actowner):
 	super(actowner)
