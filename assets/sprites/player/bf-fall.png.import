@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://uu8c3p0c10iy"
-path="res://.godot/imported/bf-walk.png-678509d60f9ed2bb245135a8001c686e.ctex"
+uid="uid://dajobvb0bpixu"
+path="res://.godot/imported/bf-fall.png-71c398e734995487952fba1ab246d5ac.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/player/bf-walk.png"
-dest_files=["res://.godot/imported/bf-walk.png-678509d60f9ed2bb245135a8001c686e.ctex"]
+source_file="res://assets/sprites/player/bf-fall.png"
+dest_files=["res://.godot/imported/bf-fall.png-71c398e734995487952fba1ab246d5ac.ctex"]
 
 [params]
 
