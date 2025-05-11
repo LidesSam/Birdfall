@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://vlffbuftu4r"]
+[gd_scene load_steps=10 format=3 uid="uid://vlffbuftu4r"]
 
 [ext_resource type="Script" uid="uid://b6qrd4yegipwi" path="res://source/system/screenTransition.gd" id="1"]
 [ext_resource type="Texture2D" uid="uid://c46hkht4auqja" path="res://assets/sprites/Solid-shade.png" id="2_7nxdg"]
 [ext_resource type="Texture2D" uid="uid://b8oln5y4locpg" path="res://assets/sprites/solid-block.png" id="3_yu28p"]
 [ext_resource type="Material" uid="uid://dokqq7kuxo23v" path="res://assets/shaders/metallic-blue.tres" id="4_0brhw"]
 [ext_resource type="Texture2D" uid="uid://y6wemekgqrm5" path="res://assets/sprites/background-bands.png" id="5_lgq6m"]
+[ext_resource type="AudioStream" uid="uid://fiuonfhnt62q" path="res://assets/sfx/trinasfx.wav" id="6_ibxto"]
 
 [sub_resource type="Animation" id="Animation_ya4bd"]
 length = 5.0
@@ -95,5 +96,8 @@ offset_bottom = 1288.0
 mouse_filter = 2
 texture = ExtResource("5_lgq6m")
 stretch_mode = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_ibxto")
 
 [connection signal="animation_finished" from="anim" to="." method="_on_anim_animation_finished"]

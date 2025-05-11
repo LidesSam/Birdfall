@@ -4,6 +4,7 @@ var on=false
 var next
 
 func change_scene_to_file(target)->void:
+	$AudioStreamPlayer.play()
 	$anim/blackout.material = Global.currentShadder
 	$anim.play("fill_up")
 	on=true

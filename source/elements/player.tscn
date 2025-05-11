@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cjkdl4rpglr3s"]
+[gd_scene load_steps=36 format=3 uid="uid://cjkdl4rpglr3s"]
 
 [ext_resource type="Texture2D" uid="uid://bxgg7udom7vik" path="res://assets/sprites/player/bf-stand.png" id="1_b1ete"]
 [ext_resource type="Script" uid="uid://db8ucos1u41dd" path="res://source/elements/player.gd" id="1_bmqvs"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://1s5roaabdb7d" path="res://source/elements/PlayerStates/hangOnWallState.gd" id="12_prp6d"]
 [ext_resource type="Script" uid="uid://s7pc3porr46m" path="res://source/elements/PlayerStates/dyingState.gd" id="13_4qmrp"]
 [ext_resource type="AudioStream" uid="uid://ctfffoduyxgtd" path="res://assets/sfx/peck.wav" id="13_eh3en"]
+[ext_resource type="AudioStream" uid="uid://br5efb31hqiq8" path="res://assets/sfx/deadSfx.wav" id="16_4u6ny"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pcn01"]
 atlas = ExtResource("1_ih8om")
@@ -277,6 +278,9 @@ pitch_scale = 0.6
 [node name="die" type="Node" parent="fsm"]
 script = ExtResource("13_4qmrp")
 metadata/_custom_type_script = "uid://dk6fjngxkiftm"
+
+[node name="deadSfx" type="AudioStreamPlayer2D" parent="fsm/die"]
+stream = ExtResource("16_4u6ny")
 
 [node name="onPeckTimer" type="Timer" parent="."]
 one_shot = true

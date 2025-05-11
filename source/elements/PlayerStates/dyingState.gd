@@ -11,7 +11,9 @@ func enter(actowner):
 	actowner.justHitWall = false
 	actowner.play_animation("dead")
 	act=actowner
-	
+	if($deadSfx):
+		$deadSfx.play()
+		$deadSfx.pitch_scale= 1 + randi()%5-2*0.02
 func _on_animated_sprite_animation_finished() -> void:
 	if(act):
 		act.death=true

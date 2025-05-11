@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://ddskdoxd1qhi3"]
+[gd_scene load_steps=5 format=3 uid="uid://ddskdoxd1qhi3"]
 
 [ext_resource type="Script" uid="uid://d3qo0m2pvbuuv" path="res://source/elements/cronoclock.gd" id="1_awhup"]
 [ext_resource type="SpriteFrames" uid="uid://bhkflblqqvyb2" path="res://assets/sprites/items/cronoclock.tres" id="2_awhup"]
+[ext_resource type="AudioStream" uid="uid://dl1a2a7dtnfaf" path="res://assets/sfx/clockSfx.wav" id="3_shd2s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x0rya"]
 size = Vector2(8, 8)
@@ -18,6 +19,10 @@ animation = &"trigger"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 use_parent_material = true
 shape = SubResource("RectangleShape2D_x0rya")
+
+[node name="triggerSfx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_shd2s")
+volume_db = 5.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="animation_finished" from="anim" to="." method="_on_anim_animation_finished"]
