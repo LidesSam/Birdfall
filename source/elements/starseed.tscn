@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://bcwvmu2r1mdiv"]
+
+[ext_resource type="Script" uid="uid://t1qpn8d568fu" path="res://source/elements/starseed.gd" id="1_x3w0k"]
+[ext_resource type="Texture2D" uid="uid://d35oivdv81jih" path="res://assets/sprites/items/star-seed.png" id="2_h6jxa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wl032"]
+atlas = ExtResource("2_h6jxa")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ukxr"]
+atlas = ExtResource("2_h6jxa")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6lp3p"]
+atlas = ExtResource("2_h6jxa")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y51bh"]
+atlas = ExtResource("2_h6jxa")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ag122"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wl032")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ukxr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6lp3p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y51bh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x0rya"]
+size = Vector2(8, 8)
+
+[node name="starseed" type="Area2D"]
+use_parent_material = true
+script = ExtResource("1_x3w0k")
+
+[node name="anim" type="AnimatedSprite2D" parent="."]
+use_parent_material = true
+sprite_frames = SubResource("SpriteFrames_ag122")
+frame_progress = 0.93901
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+use_parent_material = true
+shape = SubResource("RectangleShape2D_x0rya")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

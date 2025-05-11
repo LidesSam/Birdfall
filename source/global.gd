@@ -10,10 +10,15 @@ extends Node
 	]
 @onready var currentShadderIndex=0
 var world=null
+var score=0
+
 func add_def_time():
 	if(world):
 		world.timeleft.add_secs(60)
-
+func add_score(points):
+	score+=points
+	if world:
+		world.update_hud()
 func random_shadder_change():
 		var r = randi()%shadders.size()
 		while r==currentShadderIndex:

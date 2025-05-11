@@ -4,7 +4,7 @@
 [ext_resource type="SpriteFrames" uid="uid://bhkflblqqvyb2" path="res://assets/sprites/items/cronoclock.tres" id="2_awhup"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x0rya"]
-size = Vector2(16, 16)
+size = Vector2(8, 8)
 
 [node name="Cronoclock" type="Area2D"]
 use_parent_material = true

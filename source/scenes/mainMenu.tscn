@@ -30,6 +30,7 @@ text = "YOUR SCORE: 000000"
 vertical_alignment = 1
 
 [node name="HighSCore" type="Label" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 256.0
 offset_top = 4.0
