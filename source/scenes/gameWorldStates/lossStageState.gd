@@ -5,7 +5,7 @@ func enter(actowner):
 	super(actowner)
 	actowner.timeleft.start()
 	actowner.player.timeover()
-	actowner.endPopupLbl.text = "Tou Loss... Try Again..."
+	actowner.endPopupLbl.text = "You Loss... Try Again..."
 	actowner.endPopup.show()#move this toprocesss 
 	Musicbox.stop()
 func update(actowner,delta):

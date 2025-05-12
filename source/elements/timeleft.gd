@@ -23,6 +23,6 @@ func timeout():
 	return $Timer.time_left<=0 and started==true
 
 func add_score_and_stop():
-	var points= floor(100* Timer.time_left)
+	var points= floor(100* $Timer.time_left)
 	Global.add_score(points)
 	stop()
