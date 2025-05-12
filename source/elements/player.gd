@@ -44,7 +44,7 @@ func _ready():
 	
 	fsm.addGlobalTransition("die",isDying)
 	
-	fsm.addStateTransition("await","idle",isNotAwaiting)
+	fsm.addStateTransition("wait","idle",isNotAwaiting)
 	fsm.addStateTransition("fall","idle",isOnGround)
 	
 	fsm.addStateTransition("idle","fall",isFalling)
@@ -66,7 +66,10 @@ func _ready():
 	
 	maxlp =3
 	lp=3
-
+	
+func wait_over():
+	awaiting=false
+	
 func isNotAwaiting():
 	return !awaiting
 #state flags function

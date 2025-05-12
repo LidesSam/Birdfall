@@ -16,6 +16,7 @@ extends Node2D
 @onready var endPopup =$hud/root/endpopup
 @onready var endPopupLbl =$hud/root/endpopup/Label
 @onready var endPopupScoreLbl =$hud/root/endpopup/ScoreLabel
+
 @onready var complete = false
 
 
@@ -25,7 +26,6 @@ func _ready() -> void:
 	fsm.autoload(self)
 	fsm.addStateTransition("startStage","onStage",countdown_over)
 	fsm.addStateTransition("onStage","lossStage",loss)
-	
 	fsm.addStateTransition("onStage","completeStage",stage_is_complete)
 	fsm.startState()
 
@@ -38,6 +38,7 @@ func countdown_over():
 	
 func stage_is_complete():
 	return complete
+	
 func loss():
 	return timeleft.timeout() or player.death
 #setters
@@ -60,7 +61,11 @@ func update_hud():
 	var scoretext="SCORE:"+ str("%06d" % Global.score)
 	$hud/root/score.text = scoretext
 	$hud/root/endpopup/ScoreLabel.text = scoretext
-	
+func show_full_hud():
+	$hud/root/back.show()
+	$hud/root/score.show()
+	$hud/root/endpopup/ScoreLabel.show()
+	timeleft.show()
 #callbacks
 func _on_back_button_pressed() -> void:
 	ScreenTransition.change_scene_to_file("res://source/scenes/mainMenu.tscn")

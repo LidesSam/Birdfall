@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=4 uid="uid://dvvy75jb8tc0d"]
+[gd_scene load_steps=23 format=4 uid="uid://dvvy75jb8tc0d"]
 
 [ext_resource type="Texture2D" uid="uid://b33delcwra5dt" path="res://assets/sprites/tileset.png" id="1_0mw4y"]
 [ext_resource type="Material" uid="uid://dokqq7kuxo23v" path="res://assets/shaders/metallic-blue.tres" id="1_22jhh"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bcwvmu2r1mdiv" path="res://source/elements/starseed.tscn" id="7_scpiy"]
 [ext_resource type="Script" uid="uid://ct5qkh0wai5c5" path="res://addons/fsmgear/source/Fsm.gd" id="8_j1nvq"]
 [ext_resource type="Script" uid="uid://80m0h04t1ao7" path="res://source/scenes/gameWorldStates/startStageState.gd" id="9_od6b4"]
+[ext_resource type="Texture2D" uid="uid://b8oln5y4locpg" path="res://assets/sprites/solid-block.png" id="9_qaq84"]
 [ext_resource type="Script" uid="uid://dysw2chf8hifx" path="res://source/scenes/gameWorldStates/onStageState.gd" id="10_od6b4"]
 [ext_resource type="Texture2D" uid="uid://c4pcsxy26t701" path="res://assets/sprites/system/back-button/back-btn-normal.png" id="11_qaq84"]
 [ext_resource type="Texture2D" uid="uid://b3oysgc2k8qno" path="res://assets/sprites/system/back-button/back-btn-pressed.png" id="12_7xtlk"]
@@ -302,15 +303,17 @@ anchors_preset = 0
 offset_right = 480.0
 offset_bottom = 320.0
 
-[node name="TextureRect" type="TextureRect" parent="hud/root"]
+[node name="back" type="TextureRect" parent="hud/root"]
+visible = false
 use_parent_material = true
 layout_mode = 0
 offset_right = 480.0
 offset_bottom = 46.0
-texture = ExtResource("3_kf3fs")
+texture = ExtResource("9_qaq84")
 stretch_mode = 1
 
 [node name="score" type="Label" parent="hud/root"]
+visible = false
 use_parent_material = true
 layout_mode = 0
 offset_right = 240.0
@@ -320,6 +323,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="time" parent="hud/root" instance=ExtResource("6_an0i8")]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.0166667
