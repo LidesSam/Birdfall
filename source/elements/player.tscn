@@ -245,7 +245,7 @@ position = Vector2(0, 24)
 use_parent_material = true
 sprite_frames = SubResource("6")
 animation = &"walk"
-frame_progress = 0.531409
+frame_progress = 0.515135
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)

@@ -4,7 +4,7 @@ func enter(actowner):
 	super(actowner)
 	actowner.timeleft.add_score_and_stop()
 	actowner.endPopup.show()
-	actowner.endPopupLbl.text = "complete!! thanks for playing" 
+	actowner.endPopupLbl.text = "¡¡¡complete!!!" 
 	actowner.update_hud()
 	Musicbox.stop()
 	
