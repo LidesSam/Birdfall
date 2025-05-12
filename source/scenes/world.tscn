@@ -320,7 +320,6 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="time" parent="hud/root" instance=ExtResource("6_an0i8")]
-use_parent_material = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.0166667

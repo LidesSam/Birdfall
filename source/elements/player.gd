@@ -24,6 +24,7 @@ var inGround =false
 var onDropDown=false
 var inPecking=false
 var justHitWall = false	
+var awaiting = true
 
 
 @onready var fsm = $fsm
@@ -43,6 +44,7 @@ func _ready():
 	
 	fsm.addGlobalTransition("die",isDying)
 	
+	fsm.addStateTransition("await","idle",isNotAwaiting)
 	fsm.addStateTransition("fall","idle",isOnGround)
 	
 	fsm.addStateTransition("idle","fall",isFalling)
@@ -64,7 +66,9 @@ func _ready():
 	
 	maxlp =3
 	lp=3
-	
+
+func isNotAwaiting():
+	return !awaiting
 #state flags function
 func isFalling():
 	return !isOnGround() and velocity.y>0

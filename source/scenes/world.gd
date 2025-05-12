@@ -18,6 +18,7 @@ extends Node2D
 @onready var endPopupScoreLbl =$hud/root/endpopup/ScoreLabel
 @onready var complete = false
 
+
 func _ready() -> void:
 	Global.score=0
 	$hud/root.show()
@@ -49,6 +50,7 @@ func complete_stage():
 func auto_set_shadder():
 	self.material=Global.currentShadder
 	$hud/root.material =material
+	$hud/root/time.material =Global.currentSecShadder
 	#set sec material
 	player.material=Global.currentSecShadder
 	$Seeds.material=Global.currentSecShadder

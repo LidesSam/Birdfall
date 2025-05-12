@@ -17,6 +17,7 @@ func update(actowner,delta):
 		
 func exit(actowner):
 	actowner.countdownLbl.hide()
+	actowner.player.awaiting=false
 	Musicbox.start_play()
 	
 	super(actowner)

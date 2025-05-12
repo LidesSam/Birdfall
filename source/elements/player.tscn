@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cjkdl4rpglr3s"]
+[gd_scene load_steps=40 format=3 uid="uid://cjkdl4rpglr3s"]
 
 [ext_resource type="Texture2D" uid="uid://bxgg7udom7vik" path="res://assets/sprites/player/bf-stand.png" id="1_b1ete"]
 [ext_resource type="Script" uid="uid://db8ucos1u41dd" path="res://source/elements/player.gd" id="1_bmqvs"]
@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://clgeufgibmcml" path="res://source/elements/PlayerStates/idleState.gd" id="3_uw3ex"]
 [ext_resource type="Script" uid="uid://dfqrqgjnf101j" path="res://source/elements/PlayerStates/jumpState.gd" id="4_f8b30"]
 [ext_resource type="Texture2D" uid="uid://dajobvb0bpixu" path="res://assets/sprites/player/bf-fall.png" id="5_xhuny"]
-[ext_resource type="Texture2D" uid="uid://ck5gnrc1jq8qb" path="res://assets/sprites/player/bf-walk.png" id="6_ajc0h"]
+[ext_resource type="Texture2D" uid="uid://uu8c3p0c10iy" path="res://assets/sprites/player/bf-walk.png" id="6_ajc0h"]
 [ext_resource type="Script" uid="uid://dkwvnawd7nxem" path="res://source/elements/PlayerStates/fallState.gd" id="8_pcn01"]
 [ext_resource type="AudioStream" uid="uid://bx7epsc7jsytx" path="res://assets/sfx/jumpSfx.wav" id="10_1el1x"]
 [ext_resource type="Script" uid="uid://jio8f6xrbxl5" path="res://source/elements/PlayerStates/peckState.gd" id="11_prp6d"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" uid="uid://s7pc3porr46m" path="res://source/elements/PlayerStates/dyingState.gd" id="13_4qmrp"]
 [ext_resource type="AudioStream" uid="uid://ctfffoduyxgtd" path="res://assets/sfx/peck.wav" id="13_eh3en"]
 [ext_resource type="AudioStream" uid="uid://br5efb31hqiq8" path="res://assets/sfx/deadSfx.wav" id="16_4u6ny"]
+[ext_resource type="Script" uid="uid://d2odtltw74288" path="res://source/elements/PlayerStates/waitState.gd" id="18_ilo16"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pcn01"]
 atlas = ExtResource("1_ih8om")
@@ -220,7 +221,6 @@ material = ExtResource("1_ri2j7")
 script = ExtResource("1_bmqvs")
 
 [node name="lblstate" type="Label" parent="."]
-visible = false
 offset_left = -40.0
 offset_top = -32.0
 offset_right = 64.0
@@ -244,7 +244,7 @@ position = Vector2(0, 24)
 use_parent_material = true
 sprite_frames = SubResource("6")
 animation = &"walk"
-frame_progress = 0.874862
+frame_progress = 0.511846
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 4)
@@ -263,6 +263,10 @@ one_shot = true
 
 [node name="fsm" type="Node" parent="."]
 script = ExtResource("2_f8b30")
+
+[node name="wait" type="Node" parent="fsm"]
+script = ExtResource("18_ilo16")
+metadata/_custom_type_script = "uid://dk6fjngxkiftm"
 
 [node name="idle" type="Node" parent="fsm"]
 script = ExtResource("3_uw3ex")
